@@ -1,0 +1,30 @@
+
+<script>
+function categoryChange(e){
+  var a = ["1","2","3","4"];
+  var b = ["5","6","7","8"];
+  var c = ["9","10","11","12"];
+
+  if(e.value == "a") var d = a;
+  else if(e.value == "b") var d = b;
+  else if(e.value == "c") var d = c;
+  target.options.length = 0;
+
+  for (x in d){
+    var opt =document.createElement("option");
+    opt.value = d[x];
+    opt.innerHTML = d[x];
+    target.appendChild(opt);
+  }
+}
+</script>
+
+<select onchange="categoryChange(this)">
+  <option> select </option>
+  <option value = "a">a</option>
+  <option value = "b">b</option>
+  <option value = "c">c</option>
+</select>
+<select id="good">
+  <option>select<option>
+</select>

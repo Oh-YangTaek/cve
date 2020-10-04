@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <center>
+    <form action="/search/list" method="post">
+      {% csrf_token %}
+        {{form}}
+        <input type="submit" value="search">
+    </form>
+
+    <table border="1">
+      <tr>
+        <th>CVE_ID</th><th>Vulnerability_Type</th><th>Publish_Date</th><th>Update_Date</th><th>Score</th><th>Conf</th><th>Integ</th><th>Avail</th><th>Description</th>
+      </tr>
+      {% if cve %}
+        {% for s in cve %}
+          <tr>
+            <td>{{s.cve_id}}</td>
+            <td>{{s.vulnerability_type}}</td>
+            <td>{{s.publish_date}}</td>
+            <td>{{s.update_date}}</td>
+            <td>{{s.score}}</td>
+            <td>{{s.conf}}</td>
+            <td>{{s.integ}}</td>
+            <td>{{s.avail}}</td>
+            <td>{{s.description}}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="5"> 자료가 없음 </td></tr>
+      {% endif %}
+  </table>
+</center>
+</body>
+</html>
