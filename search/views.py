@@ -12,9 +12,9 @@ def Main(request):
 def ListFunc(request):
       if request.method == 'POST':
         form = SearchForm()
-        platform = request.POST.get('platform')
-        platform_version = request.POST.get('platform_version')
-        datas = CveTable.objects.filter(platform=platform,platform_version = platform_version).order_by('no')
+        product = request.POST.get('product')
+        product_version = request.POST.get('product_version')
+        datas = CveTable.objects.filter(product=product,product_version = product_version).order_by('id')
         return render(request, 'list.html' ,{'cve':datas,'form':form})
 
 def test(request):

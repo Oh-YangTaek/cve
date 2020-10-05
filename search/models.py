@@ -73,15 +73,13 @@ class AuthUserUserPermissions(models.Model):
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
-
 class CveTable(models.Model):
-    no = models.IntegerField(db_column='No', primary_key=True)  # Field name made lowercase.
-    platform = models.CharField(db_column='Platform', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    product = models.CharField(db_column='Product', max_length=30, blank=True, null=True)  # Field name made lowercase.
     version = models.CharField(db_column='Version', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    platform_version = models.CharField(db_column='Platform_Version', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    platform_type = models.CharField(db_column='Platform_Type', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    product_version = models.CharField(db_column='Product_Version', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    product_type = models.CharField(db_column='Product_Type', max_length=20, blank=True, null=True)  # Field name made lowercase.
     vendor = models.CharField(db_column='Vendor', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    etc = models.CharField(max_length=20, blank=True, null=True)
     up_date = models.CharField(db_column='Up_date', max_length=20, blank=True, null=True)  # Field name made lowercase.
     edition = models.CharField(db_column='Edition', max_length=20, blank=True, null=True)  # Field name made lowercase.
     language = models.CharField(db_column='Language', max_length=20, blank=True, null=True)  # Field name made lowercase.
@@ -89,7 +87,6 @@ class CveTable(models.Model):
     cwe_id = models.IntegerField(db_column='CWE_ID', blank=True, null=True)  # Field name made lowercase.
     n_of_exploits = models.IntegerField(db_column='n_of_Exploits', blank=True, null=True)  # Field name made lowercase.
     vulnerability_type = models.CharField(db_column='Vulnerability_Type', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    publish_year = models.IntegerField(db_column='Publish_Year', blank=True, null=True)  # Field name made lowercase.
     publish_date = models.CharField(db_column='Publish_Date', max_length=20, blank=True, null=True)  # Field name made lowercase.
     update_date = models.CharField(db_column='Update_Date', max_length=20, blank=True, null=True)  # Field name made lowercase.
     score = models.FloatField(db_column='Score', blank=True, null=True)  # Field name made lowercase.
@@ -103,9 +100,8 @@ class CveTable(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'cve_table'
-
-
+        db_table = 'cve_table' 
+    
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
