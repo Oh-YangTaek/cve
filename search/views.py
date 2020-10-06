@@ -14,8 +14,15 @@ def ListFunc(request):
         form = SearchForm()
         product = request.POST.get('product')
         product_version = request.POST.get('product_version')
-        datas = CveTable.objects.filter(product = product, product_version = product_version).order_by('id')
-        return render(request, 'list.html' ,{'cve':datas,'form':form})
+        if product == '':
+          datas = CveTable.objects.filter(product_version = product_version).order_by('id')
+          return render(request, 'list.html',{'cve':datas,'form':form})
+        elif product_version == '':
+          datas = CveTable.objects.filter(product = product).order_by('id')
+          return render(request, 'list.html', {'cve':datas,'form':form})
+        else:
+          datas = CveTable.objects.filter(product = product, product_version = product_version).order_by('id')
+          return render(request, 'list.html', {'cve':datas,'form':form})
 
 def test(request):
       if request.method == 'POST':
