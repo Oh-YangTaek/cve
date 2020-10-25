@@ -24,6 +24,12 @@ def ListFunc(request):
           datas = CveTable.objects.filter(product = product, product_version = product_version).order_by('id')
           return render(request, 'list.html', {'cve':datas,'form':form})
 
+def Products(request):
+      if request.method == 'POST':
+        initial = request.POST.get('initial')
+        datas = CveTable.objects.filter(product__startwith = initial)
+        return render(request,'products.html',{'cve':datas})
+
 def test(request):
       if request.method == 'POST':
         form = SearchForm(request.POST)
