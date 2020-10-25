@@ -4,7 +4,6 @@ from search import views
 urlpatterns =[
     path('',views.Main),
     path('list', views.ListFunc),
-    path('products',views.Products),
     path('test', views.test),
     path('test2',views.test2),
 ]

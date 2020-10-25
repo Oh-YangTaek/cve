@@ -8,13 +8,14 @@
 <form action="/search/list" method="post">
   {% csrf_token %}
   <center>  
-    {{form}}
+    {{productForm}}
+<br>
+    {{productVersionForm}}
+<br>
+    {{selectForm}}
+<br>
     <input type="submit" value="search">
-  </center>
+  <center>
 </form>
-<form action="/search/products" method="post">
-  {% csrf_token %}
-    {{initial}}
-    <input type="submit" value="search">
 </body>
 </html>

@@ -1,36 +1,38 @@
 from django.shortcuts import render
 from search.models import CveTable
 from django.http.response import HttpResponseRedirect
-from .forms import SearchForm
-from .forms import ProductsForm
+from .forms import SelectForm
+from .forms import ProductForm
+from .forms import ProductVersionForm
 
 # Create your views here.
 
 def Main(request):
-    form = SearchForm()
-    initial = ProductsForm
-    return render(request, 'main.html',{'form':form, 'initial':initial})
+    productForm = ProductForm()
+    productVersionForm = ProductVersionForm()
+    selectForm = SelectForm()
+    return render(request, 'main.html',{'productForm':productForm,'productVersionForm':productVersionForm, 'selectForm':selectForm})
 
 def ListFunc(request):
       if request.method == 'POST':
-        form = SearchForm()
+        productForm = ProductForm()
+        productVersionForm = ProductVersionForm()
+        selectForm = SelectForm()
         product = request.POST.get('product')
         product_version = request.POST.get('product_version')
-        if product == '':
+        select = request.POST.get('select')
+        if select != '':
+          datas = datas = CveTable.objects.filter(product = select).order_by('id')
+          return render(request, 'list.html', {'cve':datas,'productForm':productForm,'productVersionForm':productVersionForm, 'selectForm':selectForm})
+        elif product == '':
           datas = CveTable.objects.filter(product_version = product_version).order_by('id')
-          return render(request, 'list.html',{'cve':datas,'form':form})
+          return render(request, 'list.html',{'cve':datas,'productForm':productForm,'productVersionForm':productVersionForm, 'selectForm':selectForm})
         elif product_version == '':
           datas = CveTable.objects.filter(product = product).order_by('id')
-          return render(request, 'list.html', {'cve':datas,'form':form})
+          return render(request, 'list.html', {'cve':datas,'productForm':productForm,'productVersionForm':productVersionForm, 'selectForm':selectForm})
         else:
           datas = CveTable.objects.filter(product = product, product_version = product_version).order_by('id')
-          return render(request, 'list.html', {'cve':datas,'form':form})
-
-def Products(request):
-      if request.method == 'POST':
-        initial = request.POST.get('initial')
-        datas = CveTable.objects.filter(product__(i)startswith = initial).distinct('product')
-        return render(request,'products.html',{'cve':datas})
+          return render(request, 'list.html', {'cve':datas,'productForm':productForm,'productVersionForm':productVersionForm, 'selectForm':selectForm})
 
 def test(request):
       if request.method == 'POST':
