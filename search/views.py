@@ -29,7 +29,7 @@ def ListFunc(request):
 def Products(request):
       if request.method == 'POST':
         initial = request.POST.get('initial')
-        datas = CveTable.objects.filter(product__startswith = initial)
+        datas = CveTable.objects.filter(product__(i)startswith = initial).distinct('product')
         return render(request,'products.html',{'cve':datas})
 
 def test(request):
