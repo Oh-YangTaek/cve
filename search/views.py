@@ -2,12 +2,14 @@ from django.shortcuts import render
 from search.models import CveTable
 from django.http.response import HttpResponseRedirect
 from .forms import SearchForm
+from .forms import ProductsForm
 
 # Create your views here.
 
 def Main(request):
     form = SearchForm()
-    return render(request, 'main.html',{'form':form})
+    initial = ProductsForm
+    return render(request, 'main.html',{'form':form, 'initial':initial})
 
 def ListFunc(request):
       if request.method == 'POST':
